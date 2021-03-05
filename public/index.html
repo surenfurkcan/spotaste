@@ -1,1 +1,342 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Spotaste - Compare your taste of music with others.</title>
+		<link rel="icon" href="favicon.png">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Compare your taste of music with others." />
+		<meta name="keywords" content="spotify,music,taste,compare,top,artists,tracks" />
+		<link rel="stylesheet" href="assets/css/main.css" />
 
+		<!-- Style -->
+
+		<style type="text/css">
+			
+			body{
+		        background-color: #00ff99;
+            overflow: visible;
+	      	}
+
+	      	.copyright{
+	      		text-decoration-color: black;
+	      	}
+
+          .pull-left{
+            border-style: solid;
+          }
+
+		</style>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+<div id="wrapper">
+
+				<!-- Login -->
+          
+		<section class="intro" id="login">
+
+				<header>
+
+            <div class="" id="">
+                <br>
+                <h1>Spotaste</h1>
+                  <script>
+                      setInterval(function () {
+                      var r = Math.floor(Math.random() * 255)
+                      var g = Math.floor(Math.random() * 255)
+                      var b = Math.floor(Math.random() * 255)
+                      document.querySelector('h1').style.color = 'rgb( ' + r + ',' + g + ',' + b + ')';
+                      }, 500)
+                  </script>
+
+                <h2>Compare your taste of music with others.</h2>
+
+                  <ul class="icons">
+                    <li><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/surenfurkcan" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/surenfurkcan" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+                  </ul>
+
+                  <footer>
+
+                      <div class="content">
+                        <ul class="actions">
+                          <li><a href="/login" class="button primary large">Compare now!</a></li>
+                          <li><a href="#first" class="button primary large">How it works?</a></li>
+                        </ul>
+                      </div>
+
+                      <div>Made with back pain by <a target="_blank" rel="noopener noreferrer" href="https://afsuren.com/"><strong>Furkan Suren</strong></a>.</div>
+
+                      <div>An <a target="_blank" rel="noopener noreferrer" href="https://github.com/surenfurkcan/spotaste">open source </a>project.</div>
+                      
+                  </footer>
+
+            </div>
+              
+      </header>
+
+      <div class="content">
+              <span class="image fill" data-position="center">
+                <img src="spotaste.jpg"/></span>
+      </div>
+
+    </section>
+
+    <section id="first">
+            <header>
+              <h2>What is Spotaste and How it Works?</h2>
+            </header>
+            <div class="content">
+              <h2>A Comparison.</h2>
+              <p>Spotaste is a web application that lets you compare your taste of music with your friend, crush or granny. It uses <strong>User Related Data </strong>from Spotify's database through <a target="_blank" rel="noopener noreferrer" href="https://developer.spotify.com/documentation/web-api/"><strong>Web API </strong></a>. The one and only thing it needs to make a comparison between you and your pal is your top tracks and artists data <strong>(none of this data is stored btw)</strong>. At the end of the process of data request, there is a list of your <strong>top artists and tracks of last 6 months</strong> is created. Finally, a unique invite link is created for you to send anyone you want to compare your taste. <a href="/login"><strong>So let's get started now!</strong></a></p>
+
+              <h3>Score System</h3>
+
+              <p>When you make a comparison, Spotaste makes some mathematical operations to calculate how similar are your tastes. So you can see your score as a percentage.</p>
+
+              <h3>Privacy Policy</h3>
+
+              <p>Spotaste uses some of your <a target="_blank" rel="noopener noreferrer" href="legal.html"><strong>Spotify data</strong></a> while you are using the app and will never store any of this data after the web session ends.</p>
+              <p>You can remove access to your Spotify account <a target="_blank" rel="noopener noreferrer" href="https://www.spotify.com/account/apps/"><strong>here</strong></a>.</p>
+
+              
+            </div>
+    </section>
+
+    
+
+<div class="loggedin" id="loggedin">
+  <section>
+              <header>
+                <br>
+                <div id="user-profile"></div>
+                <br>
+                <div id="user-top-artists"></div>
+              </header>
+                  
+                  <div id="user-top-tracks"></div>
+                  
+                  
+                  <div id="oauth"></div>
+                  <button class="btn btn-default" id="obtain-new-token"></button>
+              
+
+              <div class="content">
+
+                <!-- Section -->
+                  <section>
+                    <header>
+                      <div id="user-top-images"></div>
+                    </header>
+                    <div class="content">
+                      <div class="gallery">
+                        
+                      </div>
+                    </div>
+                  </section>
+
+              </div>
+  </section>
+
+</div>
+
+</div>
+
+          
+          
+          
+          
+
+          
+							
+
+          
+          <!-- Template -->
+      
+      <script class="user" id="user-profile-template" type="text/x-handlebars-template">
+      
+      <div class="media">
+        <div class="pull-left">
+          <img class="media-object" width="150" style='border: 4px solid #000000;' src="{{images.0.url}}" />
+          <h3 style=""><b>{{display_name}}</b></h3>
+        </div>
+      </div>
+    </script>
+
+    <script id="user-top-artists-template" type="text/x-handlebars-template">
+    <div>
+      <h2>Top Artists</h2>
+        {{#each this}}
+            <div class="row">
+                  <h3>{{name}}</h3>
+            </div>
+        {{/each}}
+    </div>
+    </script>
+
+    <script id="user-top-images-template" type="text/x-handlebars-template">
+    <div>
+        {{#each this}}
+            <div class="row">
+              <img style='border: 4px solid #000000;' src="{{images.2.url}}" />
+              
+            </div>
+        {{/each}}
+    </div>
+    </script>
+
+    <script id="user-top-tracks-template" type="text/x-handlebars-template">
+    <div>
+      <h2>Top Tracks</h2>
+        {{#each this}}
+            <div class="row">
+                  <h3>{{name}}</h3>
+            </div>
+        {{/each}}
+    </div>
+    </script>
+
+    <!-- Template End -->
+
+   <script id="oauth-template" type="text/x-handlebars-template">
+      <h2 style="color: black"></h2>
+      <dl class="dl-horizontal">
+        <dt></dt><dd style="color: #00ff99" class="text-overflow">{{access_token}}</dd>
+        <dt></dt><dd style="color: #00ff99" class="text-overflow">{{refresh_token}}</dd>
+      </dl>
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script>
+      (function() {
+
+        /**
+         * Obtains parameters from the hash of the URL
+         * @return Object
+         */
+        function getHashParams() {
+          var hashParams = {};
+          var e, r = /([^&;=]+)=?([^&;]*)/g,
+              q = window.location.hash.substring(1);
+          while ( e = r.exec(q)) {
+             hashParams[e[1]] = decodeURIComponent(e[2]);
+          }
+          return hashParams;
+        }
+
+        var userProfileSource = document.getElementById('user-profile-template').innerHTML,
+            userProfileTemplate = Handlebars.compile(userProfileSource),
+            userProfilePlaceholder = document.getElementById('user-profile');
+
+        var topArtistsSource = document.getElementById('user-top-artists-template').innerHTML,
+            userTopArtistsTemplate = Handlebars.compile(topArtistsSource),
+            userTopArtistsPlaceholder = document.getElementById('user-top-artists');
+
+        var topArtistsSource = document.getElementById('user-top-images-template').innerHTML,
+            userTopArtistsTemplate = Handlebars.compile(topArtistsSource),
+            userTopArtistsPlaceholder = document.getElementById('user-top-images');
+
+        var topTracksSource = document.getElementById('user-top-tracks-template').innerHTML,
+            userTopTracksTemplate = Handlebars.compile(topTracksSource),
+            userTopTracksPlaceholder = document.getElementById('user-top-tracks');
+
+        var oauthSource = document.getElementById('oauth-template').innerHTML,
+            oauthTemplate = Handlebars.compile(oauthSource),
+            oauthPlaceholder = document.getElementById('oauth');
+
+        var params = getHashParams();
+
+        var access_token = params.access_token,
+            refresh_token = params.refresh_token,
+            error = params.error;
+
+        if (error) {
+          alert('There was an error during the authentication');
+        } else {
+          if (access_token) {
+            // render oauth info
+            oauthPlaceholder.innerHTML = oauthTemplate({
+              access_token: access_token,
+              refresh_token: refresh_token
+            });
+
+            $.ajax({
+                url: 'https://api.spotify.com/v1/me',
+                headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+                success: function(response) {
+                  console.log(response);
+                  userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+
+                  $('#login').hide();
+                  $('#loggedin').show();
+                }
+            });
+
+            $.ajax({
+                url: 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10',
+                headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+                success: function(body) {
+                  userTopArtistsPlaceholder.innerHTML = userTopArtistsTemplate(body.items);
+                  console.log(body.items);
+                  $('#login').hide();
+                  $('#loggedin').show();
+                }
+            });
+
+            $.ajax({
+                url: 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50',
+                headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+                success: function(body) {
+                  console.log(body.items);
+                  userTopTracksPlaceholder.innerHTML = userTopTracksTemplate(body.items);
+
+                  $('#login').hide();
+                  $('#loggedin').show();
+                }
+            });
+
+          } else {
+              // render initial screen
+              $('#login').show();
+              $('#loggedin').hide();
+          }
+
+          document.getElementById('obtain-new-token').addEventListener('click', function() {
+            $.ajax({
+              url: '/refresh_token',
+              data: {
+                'refresh_token': refresh_token
+              }
+            }).done(function(data) {
+              access_token = data.access_token;
+              oauthPlaceholder.innerHTML = oauthTemplate({
+                access_token: access_token,
+                refresh_token: refresh_token
+              });
+            });
+          }, false);
+        }
+      })();
+    </script>
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
