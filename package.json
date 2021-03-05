@@ -1,0 +1,28 @@
+{
+  "name": "Spotaste",
+  "version": "1.0.0",
+  "description": "Compare your taste of music with others.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "spotify",
+    "top",
+    "artists",
+    "tracks",
+    "compare"
+  ],
+  "author": "Furkan Suren",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.4",
+    "querystring": "~0.2.0",
+    "request": "~2.83.0",
+    "spotify-web-api-js": "^1.5.1",
+    "spotify-web-api-node": "^5.0.2",
+    "superagent": "^6.1.0"
+  }
+}
